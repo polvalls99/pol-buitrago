@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<html lang="ca">
+<head>
+  <meta charset="UTF-8" />
+  <title>Compte enrere pel meu aniversari 🎂</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <!-- Font xula de Google -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap" rel="stylesheet">
+
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: "Poppins", system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: radial-gradient(circle at top, #ff9a9e 0, #fad0c4 40%, #1e1e2f 100%);
+      color: #fff;
+      overflow: hidden;
+    }
+
+    /* Partícules de fons suaus */
+    .bubble {
+      position: fixed;
+      border-radius: 50%;
+      opacity: 0.22;
+      filter: blur(1px);
+      animation: float 16s linear infinite;
+      mix-blend-mode: screen;
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    .bubble:nth-child(1) { width: 120px; height: 120px; left: 5%; bottom: -160px; background: #ffecd2; animation-delay: 0s; }
+    .bubble:nth-child(2) { width: 180px; height: 180px; left: 75%; bottom: -220px; background: #fcb69f; animation-delay: 3s; }
+    .bubble:nth-child(3) { width: 90px; height: 90px; left: 50%; bottom: -140px; background: #a1c4fd; animation-delay: 6s; }
+
+    @keyframes float {
+      0% { transform: translateY(0) translateX(0); }
+      50% { transform: translateY(-50vh) translateX(20px); }
+      100% { transform: translateY(-100vh) translateX(-20px); }
+    }
+
+    .container {
+      position: relative;
+      z-index: 1;
+      padding: 2.5rem 2rem 2.5rem;
+      max-width: 480px;
+      width: 90%;
+      background: rgba(10, 10, 25, 0.70);
+      border-radius: 24px;
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      backdrop-filter: blur(18px);
+      box-shadow:
+        0 25px 60px rgba(0, 0, 0, 0.55),
+        0 0 0 1px rgba(255, 255, 255, 0.04);
+      text-align: center;
+    }
+
+    .title {
+      font-size: 1.9rem;
+      font-weight: 700;
+      margin-bottom: 0.5rem;
+      letter-spacing: 1px;
+    }
+
+    .subtitle {
+      font-size: 0.95rem;
+      font-weight: 300;
+      opacity: 0.8;
+      margin-bottom: 1.8rem;
+    }
+
+    .highlight {
+      background: linear-gradient(120deg, #ffe259, #ffa751);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+      font-weight: 700;
+    }
+
+    .countdown {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 0.75rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .time-box {
+      background: radial-gradient(circle at top, rgba(255, 255, 255, 0.25), rgba(0, 0, 0, 0.35));
+      border-radius: 18px;
+      padding: 0.8rem 0.4rem;
+      box-shadow: 0 12px 25px rgba(0, 0, 0, 0.4);
+      border: 1px solid rgba(255, 255, 255, 0.14);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .time-box::before {
+      content: "";
+      position: absolute;
+      top: -60%;
+      left: -60%;
+      width: 140%;
+      height: 140%;
+      background: radial-gradient(circle, rgba(255,255,255,0.12), transparent 60%);
+      opacity: 0;
+      transform: translateY(30px);
+      transition: opacity 0.6s ease, transform 0.6s ease;
+    }
+
+    .time-box:hover::before {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .time-value {
+      font-size: 1.5rem;
+      font-weight: 700;
+      letter-spacing: 1px;
+    }
+
+    .time-label {
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 1.3px;
+      opacity: 0.75;
+      margin-top: 0.1rem;
+    }
+
+    .date-info {
+      font-size: 0.75rem;
+      opacity: 0.75;
+      margin-bottom: 1.3rem;
+    }
+
+    .status {
+      font-size: 0.9rem;
+      font-weight: 400;
+      opacity: 0.9;
+    }
+
+    .status strong {
+      font-weight: 700;
+    }
+
+    .status.celebration {
+      font-size: 1.2rem;
+      margin-top: 0.8rem;
+      animation: pop 0.9s ease-out forwards;
+    }
+
+    @keyframes pop {
+      0% { transform: scale(0.8); opacity: 0; }
+      60% { transform: scale(1.08); opacity: 1; }
+      100% { transform: scale(1); }
+    }
+
+    .emoji {
+      display: inline-block;
+      font-size: 1.3rem;
+      margin-left: 0.3rem;
+    }
+
+    /* Botonet decoratiu */
+    .tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.25rem;
+      padding: 0.25rem 0.7rem;
+      border-radius: 999px;
+      font-size: 0.7rem;
+      text-transform: uppercase;
+      letter-spacing: 1.2px;
+      background: rgba(0, 0, 0, 0.4);
+      border: 1px solid rgba(255, 255, 255, 0.25);
+      margin-bottom: 1rem;
+    }
+
+    .dot {
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: #7cffcb;
+      box-shadow: 0 0 8px #7cffcb;
+    }
+
+    @media (max-width: 480px) {
+      .container {
+        padding: 2rem 1.3rem 2.2rem;
+      }
+      .title {
+        font-size: 1.6rem;
+      }
+      .time-value {
+        font-size: 1.3rem;
+      }
+      .time-label {
+        font-size: 0.65rem;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Bombolles decoratives -->
+  <div class="bubble"></div>
+  <div class="bubble"></div>
+  <div class="bubble"></div>
+
+  <div class="container">
+    <div class="tag">
+      <span class="dot"></span>
+      <span>Compte enrere actiu</span>
+    </div>
+
+    <h1 class="title">Compte enrere pel meu <span class="highlight">aniversari</span> 🎂</h1>
+    <p class="subtitle">
+      Cada segon que passa estem més a prop de la festa.  
+      <span class="highlight">Preparat/ada?</span>
+    </p>
+
+    <p class="date-info" id="dateInfo"></p>
+
+    <div class="countdown">
+      <div class="time-box">
+        <div class="time-value" id="days">00</div>
+        <div class="time-label">Dies</div>
+      </div>
+      <div class="time-box">
+        <div class="time-value" id="hours">00</div>
+        <div class="time-label">Hores</div>
+      </div>
+      <div class="time-box">
+        <div class="time-value" id="minutes">00</div>
+        <div class="time-label">Minuts</div>
+      </div>
+      <div class="time-box">
+        <div class="time-value" id="seconds">00</div>
+        <div class="time-label">Segons</div>
+      </div>
+    </div>
+
+    <p class="status" id="statusText">
+      Falten uns quants segons perquè arribi el moment més important de l'any... <strong>el teu cumple</strong> 🥳
+    </p>
+  </div>
+
+  <script>
+    // 👇👇👇
+    // CANVIA AQUI LA DATA DEL TEU ANIVERSARI
+    // Format recomanat: "AAAA-MM-DDTHH:MM:SS"
+    // Exemple: si fas anys el 15 de març a les 00:00, posa "2026-03-15T00:00:00"
+    const birthday = new Date("2026-03-15T00:00:00");
+    // ☝️☝️☝️
+
+    const daysEl = document.getElementById("days");
+    const hoursEl = document.getElementById("hours");
+    const minutesEl = document.getElementById("minutes");
+    const secondsEl = document.getElementById("seconds");
+    const statusText = document.getElementById("statusText");
+    const dateInfo = document.getElementById("dateInfo");
+
+    // Mostrem la data de referència de forma maca
+    const options = { weekday: "long", year: "numeric", month: "long", day: "numeric" };
+    dateInfo.textContent = "El gran dia és: " + birthday.toLocaleDateString("ca-ES", options);
+
+    function updateCountdown() {
+      const now = new Date();
+      const diff = birthday.getTime() - now.getTime();
+
+      if (diff <= 0) {
+        // Ja és l'aniversari! 🎉
+        daysEl.textContent = "00";
+        hoursEl.textContent = "00";
+        minutesEl.textContent = "00";
+        secondsEl.textContent = "00";
+        statusText.innerHTML = "🎉 <strong>MOLTES FELICITATS!</strong> Avui és el teu aniversari, gaudeix-lo al màxim 🥳";
+        statusText.classList.add("celebration");
+        clearInterval(timer);
+        confettiEffect();
+        return;
+      }
+
+      const seconds = Math.floor(diff / 1000);
+      const days = Math.floor(seconds / (60 * 60 * 24));
+      const hours = Math.floor((seconds % (60 * 60 * 24)) / (60 * 60));
+      const minutes = Math.floor((seconds % (60 * 60)) / 60);
+      const secs = Math.floor(seconds % 60);
+
+      daysEl.textContent = String(days).padStart(2, "0");
+      hoursEl.textContent = String(hours).padStart(2, "0");
+      minutesEl.textContent = String(minutes).padStart(2, "0");
+      secondsEl.textContent = String(secs).padStart(2, "0");
+    }
+
+    // Petit efecte de "confeti" senzill amb emojis 🥳
+    function confettiEffect() {
+      for (let i = 0; i < 40; i++) {
+        const conf = document.createElement("div");
+        conf.textContent = ["🎉", "✨", "🎊", "⭐"][Math.floor(Math.random() * 4)];
+        conf.style.position = "fixed";
+        conf.style.left = Math.random() * 100 + "vw";
+        conf.style.top = "-10vh";
+        conf.style.fontSize = Math.random() * 18 + 18 + "px";
+        conf.style.pointerEvents = "none";
+        conf.style.animation = `fall ${3 + Math.random() * 2}s linear forwards`;
+        document.body.appendChild(conf);
+
+        setTimeout(() => conf.remove(), 6000);
+      }
+    }
+
+    // Animació de caiguda per al confeti
+    const style = document.createElement("style");
+    style.textContent = `
+      @keyframes fall {
+        0% {
+          transform: translateY(0) rotate(0deg);
+          opacity: 1;
+        }
+        100% {
+          transform: translateY(110vh) rotate(360deg);
+          opacity: 0;
+        }
+      }
+    `;
+    document.head.appendChild(style);
+
+    // Actualitzem cada segon
+    updateCountdown();
+    const timer = setInterval(updateCountdown, 1000);
+  </script>
+</body>
+</html>
