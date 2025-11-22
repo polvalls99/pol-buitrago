@@ -5,18 +5,14 @@
   <title>Targeta de contacte ✨</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-  <!-- Font xula de Google -->
+  <!-- Font Google -->
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap" rel="stylesheet">
 
   <style>
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
 
     body {
-      font-family: "Poppins", system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+      font-family: "Poppins", sans-serif;
       min-height: 100vh;
       display: flex;
       align-items: center;
@@ -86,6 +82,7 @@
       box-shadow: 0 0 8px #7cffcb;
     }
 
+    /* Avatar personalitzat amb foto */
     .avatar-ring {
       width: 110px;
       height: 110px;
@@ -109,24 +106,19 @@
       width: 100%;
       height: 100%;
       border-radius: 50%;
-      background: radial-gradient(circle at 30% 20%, #ffffff 0, #ffecd2 30%, #fcb69f 65%, #1e1e2f 100%);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 2.4rem;
+      overflow: hidden;
     }
 
     .name {
       font-size: 1.6rem;
       font-weight: 700;
-      letter-spacing: 0.5px;
-      margin-bottom: 0.15rem;
+      margin-bottom: 0.2rem;
     }
 
     .role {
       font-size: 0.9rem;
       opacity: 0.8;
-      margin-bottom: 0.8rem;
+      margin-bottom: 1rem;
     }
 
     .highlight {
@@ -155,7 +147,6 @@
       display: flex;
       align-items: center;
       justify-content: space-between;
-      gap: 0.5rem;
       padding: 0.7rem 0.9rem;
       border-radius: 999px;
       background: radial-gradient(circle at top, rgba(255, 255, 255, 0.18), rgba(0, 0, 0, 0.5));
@@ -163,8 +154,13 @@
       text-decoration: none;
       color: #fff;
       font-size: 0.9rem;
-      transition: transform 0.16s ease, box-shadow 0.16s ease, border-color 0.16s ease, background 0.16s ease;
       box-shadow: 0 10px 20px rgba(0, 0, 0, 0.45);
+      transition: 0.16s ease;
+    }
+
+    .link-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 16px 26px rgba(0, 0, 0, 0.6);
     }
 
     .link-btn-left {
@@ -173,162 +169,119 @@
       gap: 0.5rem;
     }
 
-    .link-icon {
-      font-size: 1.1rem;
-    }
-
-    .link-label {
-      font-weight: 500;
-      letter-spacing: 0.4px;
-    }
-
-    .link-handle {
-      font-size: 0.75rem;
-      opacity: 0.75;
-    }
-
-    .link-arrow {
-      font-size: 1.1rem;
-      opacity: 0.9;
-    }
-
-    .link-btn:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 16px 26px rgba(0, 0, 0, 0.6);
-      border-color: rgba(255, 255, 255, 0.4);
-      background: radial-gradient(circle at top, rgba(255, 255, 255, 0.24), rgba(0, 0, 0, 0.55));
-    }
-
-    .link-btn:active {
-      transform: translateY(0);
-      box-shadow: 0 8px 16px rgba(0, 0, 0, 0.5);
-    }
+    .link-icon { font-size: 1.1rem; }
+    .link-label { font-weight: 500; }
+    .link-handle { font-size: 0.75rem; opacity: 0.75; }
+    .link-arrow { font-size: 1.1rem; opacity: 0.9; }
 
     .footer-note {
       font-size: 0.7rem;
       opacity: 0.7;
     }
-
-    .footer-note span {
-      opacity: 1;
-    }
-
-    @media (max-width: 480px) {
-      .container {
-        padding: 2.1rem 1.3rem 2.2rem;
-      }
-      .name {
-        font-size: 1.45rem;
-      }
-      .bio {
-        font-size: 0.85rem;
-      }
-      .links {
-        gap: 0.5rem;
-      }
-      .link-btn {
-        padding: 0.7rem 0.85rem;
-      }
-    }
   </style>
 </head>
+
 <body>
 
-  <!-- Bombolles decoratives -->
-  <div class="bubble"></div>
-  <div class="bubble"></div>
-  <div class="bubble"></div>
+<!-- Bombolles -->
+<div class="bubble"></div>
+<div class="bubble"></div>
+<div class="bubble"></div>
 
-  <div class="container">
-    <div class="tag">
-      <span class="dot"></span>
-      <span>Targeta de contacte</span>
-    </div>
+<div class="container">
 
-    <!-- Avatar circular (pots canviar l’emoji per les teves inicials, per exemple) -->
-    <div class="avatar-ring">
-      <div class="avatar">
-        😎
-      </div>
-    </div>
-
-    <!-- NOM I ROL – CANVIA AQUI -->
-    <h1 class="name">El teu nom</h1>
-    <p class="role"><span class="highlight">Estudiant</span> · Creador de coses xules</p>
-
-    <!-- BIO CURTA – CANVIA AQUI -->
-    <p class="bio">
-      Aquesta és la meva targeta digital.  
-      Escaneja el <span class="highlight">tag NFC</span> o guarda aquesta pàgina per tenir sempre a mà totes les meves xarxes.
-    </p>
-
-    <!-- ENLLAÇOS PRINCIPALS – CANVIA LES URL I ELS HANDLES -->
-    <div class="links">
-      <!-- Instagram -->
-      <a class="link-btn" href="https://instagram.com/el_teu_usuari" target="_blank" rel="noopener noreferrer">
-        <div class="link-btn-left">
-          <span class="link-icon">📸</span>
-          <div>
-            <div class="link-label">Instagram</div>
-            <div class="link-handle">@el_teu_usuari</div>
-          </div>
-        </div>
-        <span class="link-arrow">↗</span>
-      </a>
-
-      <!-- LinkedIn -->
-      <a class="link-btn" href="https://www.linkedin.com/in/el-teu-usuari" target="_blank" rel="noopener noreferrer">
-        <div class="link-btn-left">
-          <span class="link-icon">💼</span>
-          <div>
-            <div class="link-label">LinkedIn</div>
-            <div class="link-handle">Perfil professional</div>
-          </div>
-        </div>
-        <span class="link-arrow">↗</span>
-      </a>
-
-      <!-- GitHub -->
-      <a class="link-btn" href="https://github.com/el-teu-usuari" target="_blank" rel="noopener noreferrer">
-        <div class="link-btn-left">
-          <span class="link-icon">💻</span>
-          <div>
-            <div class="link-label">GitHub</div>
-            <div class="link-handle">@el-teu-usuari</div>
-          </div>
-        </div>
-        <span class="link-arrow">↗</span>
-      </a>
-
-      <!-- Email -->
-      <a class="link-btn" href="mailto:el.teu.correu@example.com">
-        <div class="link-btn-left">
-          <span class="link-icon">✉️</span>
-          <div>
-            <div class="link-label">Email</div>
-            <div class="link-handle">el.teu.correu@example.com</div>
-          </div>
-        </div>
-        <span class="link-arrow">✉</span>
-      </a>
-
-      <!-- WhatsApp (opcional) -->
-      <a class="link-btn" href="https://wa.me/34600000000" target="_blank" rel="noopener noreferrer">
-        <div class="link-btn-left">
-          <span class="link-icon">💬</span>
-          <div>
-            <div class="link-label">WhatsApp</div>
-            <div class="link-handle">Missatge directe</div>
-          </div>
-        </div>
-        <span class="link-arrow">↗</span>
-      </a>
-    </div>
-
-    <p class="footer-note">
-      Fet amb <span>✨</span> per ser escanejat amb un <span>NFC tag</span>.
-    </p>
+  <div class="tag">
+    <span class="dot"></span>
+    <span>Targeta de contacte</span>
   </div>
+
+  <!-- FOTO DE PERFIL -->
+  <div class="avatar-ring">
+    <div class="avatar">
+      <img src="https://media.licdn.com/dms/image/v2/D5603AQFd5LTFoswQqw/profile-displayphoto-shrink_200_200/profile-displayphoto-shrink_200_200/0/1703348753276?e=2147483647&v=beta&t=YGFta3GxZ4BJWNZA7xwQBz5Z6OCi9PEmBSVOCuPZ7cw"
+           alt="Foto de perfil"
+           style="width: 100%; height: 100%; object-fit: cover;">
+    </div>
+  </div>
+
+  <!-- NOM I ROL -->
+  <h1 class="name">El teu nom</h1>
+  <p class="role"><span class="highlight">Estudiant</span> · Creador de coses xules</p>
+
+  <!-- BIO -->
+  <p class="bio">
+    Aquesta és la meva targeta digital.  
+    Aquí tens totes les meves xarxes i dades de contacte.
+  </p>
+
+  <!-- LINKS ORDENATS -->
+  <div class="links">
+
+    <!-- Telèfon -->
+    <a class="link-btn" href="tel:+34600000000">
+      <div class="link-btn-left">
+        <span class="link-icon">📞</span>
+        <div>
+          <div class="link-label">Telèfon</div>
+          <div class="link-handle">+34 600 000 000</div>
+        </div>
+      </div>
+      <span class="link-arrow">↗</span>
+    </a>
+
+    <!-- Email -->
+    <a class="link-btn" href="mailto:el.teu.correu@example.com">
+      <div class="link-btn-left">
+        <span class="link-icon">✉️</span>
+        <div>
+          <div class="link-label">Email</div>
+          <div class="link-handle">el.teu.correu@example.com</div>
+        </div>
+      </div>
+      <span class="link-arrow">✉</span>
+    </a>
+
+    <!-- LinkedIn -->
+    <a class="link-btn" href="https://www.linkedin.com/in/el-teu-usuari" target="_blank">
+      <div class="link-btn-left">
+        <span class="link-icon">💼</span>
+        <div>
+          <div class="link-label">LinkedIn</div>
+          <div class="link-handle">Perfil professional</div>
+        </div>
+      </div>
+      <span class="link-arrow">↗</span>
+    </a>
+
+    <!-- Instagram -->
+    <a class="link-btn" href="https://instagram.com/el_teu_usuari" target="_blank">
+      <div class="link-btn-left">
+        <span class="link-icon">📸</span>
+        <div>
+          <div class="link-label">Instagram</div>
+          <div class="link-handle">@el_teu_usuari</div>
+        </div>
+      </div>
+      <span class="link-arrow">↗</span>
+    </a>
+
+    <!-- WhatsApp -->
+    <a class="link-btn" href="https://wa.me/34600000000" target="_blank">
+      <div class="link-btn-left">
+        <span class="link-icon">💬</span>
+        <div>
+          <div class="link-label">WhatsApp</div>
+          <div class="link-handle">Missatge directe</div>
+        </div>
+      </div>
+      <span class="link-arrow">↗</span>
+    </a>
+
+  </div>
+
+  <p class="footer-note">Fet per ser escanejat amb un tag NFC ✨</p>
+
+</div>
 
 </body>
 </html>
