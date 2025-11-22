@@ -11,22 +11,39 @@
   <style>
     * { box-sizing: border-box; margin: 0; padding: 0; }
 
+    :root {
+      --bg-gradient: radial-gradient(circle at top, #ff9a9e 0, #fad0c4 40%, #1e1e2f 100%);
+      --card-bg: rgba(10, 10, 25, 0.75);
+      --card-border: rgba(255, 255, 255, 0.18);
+      --text-color: #ffffff;
+      --bubble-opacity: 0.22;
+    }
+
+    body.dark {
+      --bg-gradient: radial-gradient(circle at top, #141e30 0, #243b55 40%, #050816 100%);
+      --card-bg: rgba(5, 8, 22, 0.9);
+      --card-border: rgba(255, 255, 255, 0.28);
+      --text-color: #f5f5ff;
+      --bubble-opacity: 0.14;
+    }
+
     body {
       font-family: "Poppins", sans-serif;
       min-height: 100vh;
       display: flex;
       align-items: center;
       justify-content: center;
-      background: radial-gradient(circle at top, #ff9a9e 0, #fad0c4 40%, #1e1e2f 100%);
-      color: #fff;
+      background: var(--bg-gradient);
+      color: var(--text-color);
       overflow: hidden;
+      transition: background 0.4s ease, color 0.3s ease;
     }
 
     /* Background bubbles */
     .bubble {
       position: fixed;
       border-radius: 50%;
-      opacity: 0.22;
+      opacity: var(--bubble-opacity);
       filter: blur(1px);
       animation: float 16s linear infinite;
       mix-blend-mode: screen;
@@ -50,14 +67,15 @@
       padding: 2.5rem 2rem 2.4rem;
       max-width: 420px;
       width: 90%;
-      background: rgba(10, 10, 25, 0.75);
+      background: var(--card-bg);
       border-radius: 24px;
-      border: 1px solid rgba(255, 255, 255, 0.18);
+      border: 1px solid var(--card-border);
       backdrop-filter: blur(18px);
       box-shadow:
         0 25px 60px rgba(0, 0, 0, 0.55),
         0 0 0 1px rgba(255, 255, 255, 0.04);
       text-align: center;
+      transition: background 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
     }
 
     .tag {
@@ -80,6 +98,49 @@
       border-radius: 50%;
       background: #7cffcb;
       box-shadow: 0 0 8px #7cffcb;
+    }
+
+    /* Theme toggle button */
+    .theme-toggle {
+      position: absolute;
+      top: 1rem;
+      right: 1rem;
+      border: 1px solid rgba(255, 255, 255, 0.35);
+      background: rgba(0, 0, 0, 0.35);
+      border-radius: 999px;
+      padding: 0.25rem 0.55rem;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.35rem;
+      font-size: 0.8rem;
+      color: var(--text-color);
+      backdrop-filter: blur(10px);
+      box-shadow: 0 8px 18px rgba(0, 0, 0, 0.45);
+      transition: background 0.2s ease, transform 0.1s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+    }
+
+    .theme-toggle:hover {
+      background: rgba(0, 0, 0, 0.55);
+      transform: translateY(-1px);
+      box-shadow: 0 12px 22px rgba(0, 0, 0, 0.55);
+      border-color: rgba(255, 255, 255, 0.6);
+    }
+
+    .theme-toggle:active {
+      transform: translateY(0);
+      box-shadow: 0 6px 12px rgba(0, 0, 0, 0.5);
+    }
+
+    .theme-icon {
+      font-size: 1rem;
+    }
+
+    .theme-label {
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      font-size: 0.65rem;
+      opacity: 0.85;
     }
 
     /* Profile photo */
@@ -152,7 +213,7 @@
       background: radial-gradient(circle at top, rgba(255, 255, 255, 0.18), rgba(0, 0, 0, 0.5));
       border: 1px solid rgba(255, 255, 255, 0.18);
       text-decoration: none;
-      color: #fff;
+      color: var(--text-color);
       font-size: 0.9rem;
       box-shadow: 0 10px 20px rgba(0, 0, 0, 0.45);
       transition: 0.16s ease;
@@ -161,6 +222,7 @@
     .link-btn:hover {
       transform: translateY(-2px);
       box-shadow: 0 16px 26px rgba(0, 0, 0, 0.6);
+      border-color: rgba(255, 255, 255, 0.4);
     }
 
     .link-btn-left {
@@ -174,6 +236,12 @@
     .link-handle { font-size: 0.75rem; opacity: 0.75; }
     .link-arrow { font-size: 1.1rem; opacity: 0.9; }
 
+    /* vCard button slight highlight */
+    .link-btn.save-contact {
+      background: radial-gradient(circle at top, rgba(255, 255, 255, 0.25), rgba(0, 0, 0, 0.55));
+      border-color: rgba(255, 255, 255, 0.4);
+    }
+
     .footer-note {
       font-size: 0.7rem;
       opacity: 0.7;
@@ -185,10 +253,16 @@
 
 <!-- Floating bubbles -->
 <div class="bubble"></div>
-<div class="bubble"></div>
+div class="bubble"></div>
 <div class="bubble"></div>
 
 <div class="container">
+
+  <!-- Theme toggle -->
+  <button class="theme-toggle" id="themeToggle" type="button" aria-label="Toggle dark or light mode">
+    <span class="theme-icon" id="themeIcon">🌙</span>
+    <span class="theme-label" id="themeLabel">Light</span>
+  </button>
 
   <div class="tag">
     <span class="dot"></span>
@@ -242,7 +316,7 @@
     </a>
 
     <!-- LinkedIn -->
-    <a class="link-btn" href="https://es.linkedin.com/in/pol-buitrago" target="_blank">
+    <a class="link-btn" href="https://es.linkedin.com/in/pol-buitrago" target="_blank" rel="noopener noreferrer">
       <div class="link-btn-left">
         <span class="link-icon">💼</span>
         <div>
@@ -254,7 +328,7 @@
     </a>
 
     <!-- Instagram -->
-    <a class="link-btn" href="https://instagram.com/pol_btr" target="_blank">
+    <a class="link-btn" href="https://instagram.com/pol_btr" target="_blank" rel="noopener noreferrer">
       <div class="link-btn-left">
         <span class="link-icon">📸</span>
         <div>
@@ -266,7 +340,7 @@
     </a>
 
     <!-- WhatsApp -->
-    <a class="link-btn" href="https://wa.me/34608019708" target="_blank">
+    <a class="link-btn" href="https://wa.me/34608019708" target="_blank" rel="noopener noreferrer">
       <div class="link-btn-left">
         <span class="link-icon">💬</span>
         <div>
@@ -277,11 +351,55 @@
       <span class="link-arrow">↗</span>
     </a>
 
+    <!-- Save contact (vCard) -->
+    <a class="link-btn save-contact" href="pol_buitrago.vcf" download="Pol_Buitrago_Contact.vcf">
+      <div class="link-btn-left">
+        <span class="link-icon">💾</span>
+        <div>
+          <div class="link-label">Save contact</div>
+          <div class="link-handle">Download vCard</div>
+        </div>
+      </div>
+      <span class="link-arrow">⬇</span>
+    </a>
+
   </div>
 
-  <p class="footer-note">Designed to be used with an NFC tag ✨</p>
+  <p class="footer-note">Designed to be opened from an NFC tag ✨</p>
 
 </div>
+
+<script>
+  // Theme toggle logic
+  const body = document.body;
+  const themeToggle = document.getElementById('themeToggle');
+  const themeIcon = document.getElementById('themeIcon');
+  const themeLabel = document.getElementById('themeLabel');
+
+  // Load stored theme if exists
+  const storedTheme = localStorage.getItem('theme');
+  if (storedTheme === 'dark') {
+    body.classList.add('dark');
+    themeIcon.textContent = '☀️';
+    themeLabel.textContent = 'Dark';
+  } else {
+    themeIcon.textContent = '🌙';
+    themeLabel.textContent = 'Light';
+  }
+
+  themeToggle.addEventListener('click', () => {
+    const isDark = body.classList.toggle('dark');
+    if (isDark) {
+      themeIcon.textContent = '☀️';
+      themeLabel.textContent = 'Dark';
+      localStorage.setItem('theme', 'dark');
+    } else {
+      themeIcon.textContent = '🌙';
+      themeLabel.textContent = 'Light';
+      localStorage.setItem('theme', 'light');
+    }
+  });
+</script>
 
 </body>
 </html>
